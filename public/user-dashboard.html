@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - Express Auth</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="navbar">
+            <h3>Mi Cuenta</h3>
+            <button id="logoutBtn" class="btn btn-danger">Cerrar Sesión</button>
+        </div>
+        
+        <div id="errorContainer"></div>
+        <div id="successContainer"></div>
+        
+        <div class="text-center mb-1">
+            <h2>¡Bienvenido! Aquí están tus datos</h2>
+            <p style="color: #666;">
+                Este es tu panel de usuario. Aquí puedes ver toda tu información personal.
+            </p>
+        </div>
+        
+        <div id="userProfile">
+            <!-- El perfil se cargará dinámicamente -->
+        </div>
+        
+        <div class="text-center mt-1">
+            <p style="color: #666; font-style: italic;">
+                "Bienvenido, aquí están tus datos" - Panel de usuario
+            </p>
+        </div>
+    </div>
+    
+    <script src="/js/app.js"></script>
+</body>
+</html>

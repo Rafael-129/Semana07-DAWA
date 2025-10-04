@@ -10,6 +10,10 @@ class UserRepository {
         return User.findOne({ email }).populate('roles').exec();
     }
 
+    async getByEmail(email) {
+        return User.findOne({ email }).populate('roles').exec();
+    }
+
     async findById(id) {
         return User.findById(id).populate('roles').exec();
     }

@@ -17,7 +17,14 @@ class UserService {
             id: user._id,
             email: user.email,
             name: user.name,
-            roles: user.roles.map(r => r.name)
+            lastName: user.lastName,
+            phoneNumber: user.phoneNumber,
+            birthdate: user.birthdate,
+            url_profile: user.url_profile,
+            adress: user.adress,
+            roles: user.roles,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
         };
     }
 }

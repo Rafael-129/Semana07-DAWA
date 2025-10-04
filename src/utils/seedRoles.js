@@ -6,6 +6,6 @@ export default async function seedRoles() {
     if (existing.length === 0) {
         await roleRepository.create({ name: 'user' });
         await roleRepository.create({ name: 'admin' });
-        console.log('Seeded roles: user, admin');
+        console.log('✅ Roles creados: user, admin');
     }
 }

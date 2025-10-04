@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador - Express Auth</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="navbar">
+            <h3>Panel de Administrador</h3>
+        </div>
+        
+        <div id="errorContainer"></div>
+        <div id="successContainer"></div>
+        
+        <!-- Navegación de pestañas -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="profile">👤 Mi Perfil</button>
+                <button class="tab-btn" data-tab="dashboard">📊 Panel de Administrador</button>
+            </div>
+        </div>
+        
+        <!-- Contenido de Mi Perfil -->
+        <div id="profileTab" class="tab-content active">
+            <div class="text-center mb-1">
+                <h2>Mi Perfil de Administrador</h2>
+                <p style="color: #666;">
+                    Aquí puedes ver tu información personal como administrador del sistema.
+                </p>
+            </div>
+            
+            <div id="adminProfile">
+                <!-- El perfil del admin se cargará dinámicamente -->
+            </div>
+            
+            <div class="text-center mt-1">
+                <button id="logoutBtn" class="btn btn-danger" style="max-width: 200px; font-size: 0.9rem; padding: 0.5rem 1rem;">
+                    🚪 Cerrar Sesión
+                </button>
+            </div>
+        </div>
+        
+        <!-- Contenido del Panel de Administrador -->
+        <div id="dashboardTab" class="tab-content">
+            <div class="text-center mb-1">
+                <h2>Panel de Administración</h2>
+                <p style="color: #666;">
+                    Como administrador, puedes ver todos los usuarios registrados en el sistema.
+                </p>
+                <button id="loadUsersBtn" class="btn btn-primary" style="max-width: 200px; font-size: 0.9rem; padding: 0.5rem 1rem; margin-bottom: 1rem;">
+                    🔄 Cargar Usuarios
+                </button>
+            </div>
+            
+            <div id="usersList">
+                <!-- La lista de usuarios se cargará dinámicamente -->
+            </div>
+            
+            <div class="text-center mt-1">
+                <p style="color: #666; font-style: italic;">
+                    Solo usuarios logueados con rol admin (o superior) pueden acceder a esta información.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/js/app.js"></script>
+</body>
+</html>
