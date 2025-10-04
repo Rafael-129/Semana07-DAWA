@@ -149,7 +149,10 @@ const API = {
 
     // Usuarios
     async getProfile() {
-        return await this.request('/users/me');
+        console.log('🌐 Haciendo petición a /users/me');
+        const result = await this.request('/users/me');
+        console.log('📥 Respuesta de getProfile:', result);
+        return result;
     },
 
     async getAllUsers() {
@@ -357,10 +360,17 @@ const AuthController = {
 // Controlador del Dashboard
 const DashboardController = {
     init() {
+        console.log('🚀 Inicializando Dashboard Controller');
+        
         if (!Utils.isAuthenticated()) {
+            console.log('❌ Usuario no autenticado, redirigiendo a signin');
             window.location.href = '/signin.html';
             return;
         }
+
+        console.log('✅ Usuario autenticado, cargando dashboard');
+        console.log('👤 Roles del usuario:', Utils.getUserRoles());
+        console.log('👑 Es administrador:', Utils.isAdmin());
 
         this.loadUserData();
         this.bindEvents();
@@ -369,26 +379,35 @@ const DashboardController = {
 
     async loadUserData() {
         try {
+            console.log('👤 Cargando datos del usuario...');
             const profile = await API.getProfile();
+            console.log('✅ Perfil del usuario cargado:', profile);
             this.displayUserProfile(profile);
             
-            // Si es admin, cargar también la lista de usuarios cuando se acceda a esa pestaña
+            // Si es admin, configurar las pestañas de administrador
             if (Utils.isAdmin()) {
-                // No cargar inmediatamente, sino cuando se haga clic en la pestaña
+                console.log('👑 Usuario es administrador, configurando pestañas admin');
                 this.setupAdminTabs();
             }
         } catch (error) {
-            Utils.showError('Error al cargar los datos del usuario');
-            console.error(error);
+            console.error('❌ Error al cargar datos del usuario:', error);
+            Utils.showError('Error al cargar los datos del usuario: ' + error.message);
         }
     },
 
     displayUserProfile(user) {
+        console.log('🖼️ Mostrando perfil de usuario:', user);
+        
         // Para dashboard de usuario normal
         const profileContainer = document.getElementById('userProfile');
         // Para dashboard de administrador (pestaña perfil)
         const adminProfileContainer = document.getElementById('adminProfile');
         
+        if (!profileContainer && !adminProfileContainer) {
+            console.error('❌ No se encontró contenedor para mostrar el perfil');
+            return;
+        }
+
         const rolesBadges = user.roles.map(role => {
             const roleName = typeof role === 'string' ? role : role.name;
             return `<span class="badge badge-${roleName}">${roleName}</span>`;
@@ -429,10 +448,12 @@ const DashboardController = {
         `;
 
         if (profileContainer) {
+            console.log('📄 Mostrando perfil en dashboard de usuario');
             profileContainer.innerHTML = profileHTML;
         }
         
         if (adminProfileContainer) {
+            console.log('📄 Mostrando perfil en dashboard de administrador');
             adminProfileContainer.innerHTML = profileHTML;
         }
     },
@@ -562,12 +583,21 @@ const DashboardController = {
             logoutBtn.addEventListener('click', AuthController.handleLogout);
         }
 
-        // Botón para cargar usuarios manualmente (debug)
+        // Botón para cargar usuarios manualmente (debug) - solo en admin dashboard
         const loadUsersBtn = document.getElementById('loadUsersBtn');
         if (loadUsersBtn) {
             loadUsersBtn.addEventListener('click', () => {
                 console.log('🔄 Carga manual de usuarios solicitada');
                 this.loadAllUsers();
+            });
+        }
+
+        // Botón para recargar perfil - solo en user dashboard
+        const reloadProfileBtn = document.getElementById('reloadProfileBtn');
+        if (reloadProfileBtn) {
+            reloadProfileBtn.addEventListener('click', () => {
+                console.log('🔄 Recarga manual de perfil solicitada');
+                this.loadUserData();
             });
         }
     }

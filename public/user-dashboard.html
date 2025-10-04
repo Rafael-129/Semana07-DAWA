@@ -10,7 +10,6 @@
     <div class="dashboard-container">
         <div class="navbar">
             <h3>Mi Cuenta</h3>
-            <button id="logoutBtn" class="btn btn-danger">Cerrar Sesión</button>
         </div>
         
         <div id="errorContainer"></div>
@@ -21,10 +20,19 @@
             <p style="color: #666;">
                 Este es tu panel de usuario. Aquí puedes ver toda tu información personal.
             </p>
+            <button id="reloadProfileBtn" class="btn btn-secondary" style="max-width: 200px; font-size: 0.9rem; padding: 0.5rem 1rem; margin-bottom: 1rem;">
+                🔄 Recargar Datos
+            </button>
         </div>
         
         <div id="userProfile">
             <!-- El perfil se cargará dinámicamente -->
+        </div>
+        
+        <div class="text-center mt-1">
+            <button id="logoutBtn" class="btn btn-danger" style="max-width: 200px; font-size: 0.9rem; padding: 0.5rem 1rem;">
+                🚪 Cerrar Sesión
+            </button>
         </div>
         
         <div class="text-center mt-1">
